@@ -48,7 +48,6 @@ class NewsControleer {
       await browser.close();
       res.json({ news });
     } catch (error) {
-      console.log(error)
       res.status(500).json({ error });
     }
   }
