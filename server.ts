@@ -11,7 +11,10 @@ const port = process.env.HOST_PORT || 8080
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://economist-news.herokuapp.com',
+  credentials: true
+}));
 app.use(express.json());
 
 app.post('/auth/register', registerValidations, UserCtrl.create);
