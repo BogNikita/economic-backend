@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const uri =
-  'mongodb+srv://economic:economic123@cluster0.i1ovu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+  `mongodb+srv://${process.env.MONGODB_BASE_NAME}:${process.env.MONGODB_BASE_PASSWORD}@cluster0.i1ovu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 mongoose.Promise = Promise;
 

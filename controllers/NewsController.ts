@@ -23,17 +23,25 @@ class NewsControleer {
       await page.waitForSelector('a[data-analytics^="top_stories:headline_"]');
 
       const news = await page.evaluate(() => {
-        const productsList: INews[] = [];
+        const newsList: INews[] = [];
 
         document.querySelectorAll('a[data-analytics^="top_stories:headline_"]').forEach((el) => {
           const title = el.textContent || '';
           const description = el.parentElement?.nextElementSibling?.textContent || '';
           const img = el?.parentElement?.parentElement?.querySelector('img')?.src || '';
           const link = el?.getAttribute('href')?.replace('https://www.economist.com', '') || '';
-          productsList.push({ title, description, img, link });
+          newsList.push({ title, description, img, link });
         });
 
-        return productsList;
+        document.querySelectorAll('a[data-analytics^="topical_content_1:headline_"]').forEach((el) => {
+          const title = el.textContent || '';
+          const description = el.parentElement?.nextElementSibling?.textContent || '';
+          const img = el?.parentElement?.parentElement?.querySelector('img')?.src || '';
+          const link = el?.getAttribute('href')?.replace('https://www.economist.com', '') || '';
+          newsList.push({ title, description, img, link });
+        });
+
+        return newsList;
       });
 
       await browser.close();
